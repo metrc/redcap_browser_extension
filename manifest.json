@@ -4,7 +4,7 @@
   "description": "Quickly and Easily Open REDCap Projects in a New Tab",
   "version": "0.0.0.1",
   "action": {
-    "default_popup": "shorten.html",
+    "default_popup": "panel.html",
     "default_icon": "logo.png"
   },
   "permissions": [

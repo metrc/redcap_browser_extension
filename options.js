@@ -2,7 +2,9 @@
 const saveOptions = () => {
     var redcapPath = document.getElementById('redcap_path').value;
     var projectJsonPath = document.getElementById('project_json_path').value;
-    chrome.storage.sync.set({'redcap_path': redcapPath, 'project_json_path': projectJsonPath}, function() {  });
+    chrome.storage.sync.set({'redcap_path': redcapPath, 'project_json_path': projectJsonPath}, function() {
+        window.close();
+    });
 }
 
 const restoreOptions = () => {
