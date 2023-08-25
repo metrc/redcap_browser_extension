@@ -1,14 +1,17 @@
 
 const saveOptions = () => {
-    var apiKey = document.getElementById('api_key').value;
-    chrome.storage.sync.set({'api_key': apiKey}, function() {
-        window.close();
-    });
+    var redcapPath = document.getElementById('redcap_path').value;
+    var projectJsonPath = document.getElementById('project_json_path').value;
+    chrome.storage.sync.set({'redcap_path': redcapPath, 'project_json_path': projectJsonPath}, function() {  });
 }
 
 const restoreOptions = () => {
-    chrome.storage.sync.get('api_key', function(data) {
-        document.getElementById('api_key').value = data.api_key;
+    chrome.storage.sync.get('redcap_path', function(data) {
+        document.getElementById('redcap_path').value = data.redcap_path;
+    });
+
+    chrome.storage.sync.get('project_json_path', function(data) {
+        document.getElementById('project_json_path').value = data.project_json_path;
     });
 }
 

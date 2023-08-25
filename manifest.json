@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "pj14.co - URL Shortener",
-  "description": "Quickly and Easily Shorten URLs with pj14.co",
+  "name": "REDCap Admin Helper",
+  "description": "Quickly and Easily Open REDCap Projects in a New Tab",
   "version": "0.0.0.1",
   "action": {
     "default_popup": "shorten.html",
@@ -11,10 +11,6 @@
     "storage",
     "tabs"
   ],
-  "background": {
-    "service_worker": "opener.js",
-    "type": "module"
-  },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false

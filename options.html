@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>pj14.co Extension Options</title>
+    <title>Extension Options</title>
     <style>
         body {
             min-width: 400px;
-            min-height: 100px;
+            min-height: 150px;
         }
     </style>
 </head>
 <body>
 
-<p>Your key is listed on your dashboard after you log in to <a href="https://pj14.co/" target="_blank">https://pj14.co/</a></p>
+
 <p>
-<label>API Key
-<input type="text" maxlength="64" id="api_key" size="70">
+<label>Full Path to REDCap, including version number:<br/>
+<input type="text" id="redcap_path" size="70">
 </label>
+</p>
+
+<p>
+    <label>
+        Path to Project JSON:<br/>
+        <input type="text" id="project_json_path" size="70">
+    </label>
 </p>
 <div id="status"></div>
 <button id="save">Save</button>
