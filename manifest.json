@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "pj14.co - URL Shortener",
+  "description": "Quickly and Easily Shorten URLs with pj14.co",
+  "version": "0.0.0.1",
+  "action": {
+    "default_popup": "shorten.html",
+    "default_icon": "logo.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "opener.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "options_page": "options.html",
+
+  "icons": {
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "author": {
+    "email": "wiley14@gmail.com"
+  }
+}
