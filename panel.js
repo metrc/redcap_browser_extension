@@ -3,10 +3,8 @@ base_url = '';
 
 $( function() {
     chrome.storage.sync.get('project_json_path', function(data) {
-        let project_json_path = data.project_json_path;
 
-        let project_json = $.getJSON(project_json_path, function(data) {
-
+        let project_json = $.getJSON(data.project_json_path, function(data) {
             let project_list = [];
             for (let i = 0; i < data.length; i++) {
                 project_list.push({"value": data[i].project_id, "label": data[i].app_title});
