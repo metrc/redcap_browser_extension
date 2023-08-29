@@ -1,7 +1,28 @@
 base_url = '';
 
+async function runMain() {
+    // fetch the config url from storage
+    let config_url = await chrome.storage.sync.get('redcap_path');
+    config_url = config_url.redcap_path;
 
-$( function() {
+    // fetch the configuration file
+    let config = await fetch(config_url);
+    config = await config.json();
+    console.log(config);
+
+    base_url = config.base_url + 'redcap_v' + config.redcap_version + '/';
+    $('#projects').autocomplete({ source: config.projects_url });
+
+    if (config.super_user == false) {
+        $('#submit2').hide();
+        $('#submit3').hide();
+        $('#addUser').hide();
+        $('#manageEMs').hide();
+    }
+
+
+
+/*
     chrome.storage.sync.get('project_json_path', function(data) {
 
         let project_json = $.getJSON(data.project_json_path, function(data) {
@@ -15,11 +36,11 @@ $( function() {
             });
         });
     });
+*/
 
-    chrome.storage.sync.get("redcap_path", function(data) {
-        base_url = data.redcap_path;
-    });
-});
+};
+
+document.addEventListener('DOMContentLoaded', runMain);
 
 document.getElementById('submit').addEventListener('click', () => {
     let project_id = $( "#projects" ).val();
