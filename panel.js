@@ -13,7 +13,6 @@ async function runMain() {
     // fetch the configuration file
     let config = await fetch(config_url);
     config = await config.json();
-    console.log(config);
 
     base_url = config.base_url + 'redcap_v' + config.redcap_version + '/';
     $('#projects').autocomplete({ source: config.projects_url });
