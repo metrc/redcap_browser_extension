@@ -23,6 +23,12 @@
     "48": "logo.png",
     "128": "logo.png"
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "redcap-browser-extension@metrc.org",
+      "strict_min_version": "42.0"
+    }
+  },
   "author": {
     "email": "wiley14@gmail.com"
   }
