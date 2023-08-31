@@ -8,8 +8,7 @@
     "default_icon": "logo.png"
   },
   "permissions": [
-    "storage",
-    "tabs"
+    "storage"
   ],
   "options_ui": {
     "page": "options.html",
