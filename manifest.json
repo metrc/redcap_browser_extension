@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "REDCap Admin Helper",
   "description": "Quickly and Easily Open REDCap Projects in a New Tab",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "action": {
     "default_popup": "panel.html",
     "default_icon": "logo.png"
