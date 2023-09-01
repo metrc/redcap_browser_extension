@@ -1,14 +1,14 @@
 
 const saveOptions = () => {
-    var redcapPath = document.getElementById('redcap_path').value;
-    chrome.storage.sync.set({'redcap_path': redcapPath}, function() {
+    var configKey = document.getElementById('config_key').value;
+    chrome.storage.sync.set({'config_key': configKey}, function() {
         window.close();
     });
 }
 
 const restoreOptions = () => {
-    chrome.storage.sync.get('redcap_path', function(data) {
-        document.getElementById('redcap_path').value = data.redcap_path;
+    chrome.storage.sync.get('config_key', function(data) {
+        document.getElementById('config_key').value = data.config_key;
     });
 
 }

@@ -2,22 +2,21 @@ base_url = '';
 
 async function runMain() {
     // fetch the config url from storage
-    let config_url = await chrome.storage.sync.get('redcap_path');
-    config_url = config_url.redcap_path;
+    let config_key = await chrome.storage.sync.get('config_key');
 
-    if ((config_url == undefined) || (config_url == '')) {
+    if ((config_key.config_key == undefined) || (config_key.config_key == '')) {
         chrome.runtime.openOptionsPage();
         window.close();
     }
 
-    // fetch the configuration file
-    let config = await fetch(config_url);
-    config = await config.json();
+    config_data = config_key.config_key.toString().split('|', 6);
 
-    base_url = config.base_url + 'redcap_v' + config.redcap_version + '/';
-    $('#projects').autocomplete({ source: config.projects_url });
+    base_url = config_data[5] + 'redcap_v' + config_data[3] + '/';
+    projects_url = base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=projects&pid='+config_data[1]+'&NOAUTH&api_token='+config_data[0];
+    console.log(projects_url);
+    $('#projects').autocomplete({ source: projects_url });
 
-    if (config.super_user == false) {
+    if (config_data[4] == 0) {
         $('#adminLinks').hide();
     }
 
