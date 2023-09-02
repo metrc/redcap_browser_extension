@@ -13,5 +13,24 @@ const restoreOptions = () => {
 
 }
 
+function showMultiProfile() {
+    var multiProfile = document.getElementById("multi_profile");
+    var multiProfileText = document.getElementById("multi_profile_text");
+    var body = document.getElementsByTagName("body")[0];
+    if (multiProfile.checked == true){
+        multiProfileText.style.display = "block";
+        body.style.height = "500px";
+    } else {
+        multiProfileText.style.display = "none";
+        body.style.height = "150px";
+    }
+
+
+
+
+}
+
+
 document.getElementById('save').addEventListener('click', saveOptions);
+document.getElementById('multi_profile').addEventListener('click', showMultiProfile);
 document.addEventListener('DOMContentLoaded', restoreOptions);
