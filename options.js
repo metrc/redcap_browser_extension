@@ -1,12 +1,12 @@
 
-const saveOptions = () => {
+function saveOptions() {
     var configKey = document.getElementById('config_key').value;
     chrome.storage.sync.set({'config_key': configKey}, function() {
         window.close();
     });
 }
 
-const restoreOptions = () => {
+function restoreOptions() {
     chrome.storage.sync.get('config_key', function(data) {
         document.getElementById('config_key').value = data.config_key;
     });
@@ -24,10 +24,6 @@ function showMultiProfile() {
         multiProfileText.style.display = "none";
         body.style.height = "150px";
     }
-
-
-
-
 }
 
 
