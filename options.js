@@ -8,7 +8,9 @@ function saveOptions() {
 
 function restoreOptions() {
     chrome.storage.sync.get('config_key', function(data) {
-        document.getElementById('config_key').value = data.config_key;
+        if (data.config_key != undefined) {
+            document.getElementById('config_key').value = data.config_key;
+        }
     });
 
 }
