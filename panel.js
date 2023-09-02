@@ -14,7 +14,7 @@ async function runMain() {
     base_url = config_data[0] + 'redcap_v' + config_data[1] + '/';
     projects_url = base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=projects&pid='+config_data[3]+
         '&NOAUTH&api_token='+config_data[4];
-    console.log(projects_url);
+
     $('#projects').autocomplete({ source: projects_url });
 
     if (config_data[5] == 0) {
