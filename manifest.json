@@ -23,7 +23,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "redcap-browser-extension@metrc.org",
+      "id": "firefox-browser-extension@metrc.org",
       "strict_min_version": "42.0"
     }
   },
