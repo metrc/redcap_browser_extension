@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "REDCap Admin Helper",
-  "description": "Quickly and Easily Open REDCap Projects in a New Tab",
-  "version": "0.0.1.1",
+  "name": "REDCap Browser Extension",
+  "description": "Quickly and Easily Work with REDCap, including jumping straight to records and project management pages.  Administrators also get buttons to frequently used system configuration pages.",
+  "version": "1.0.0.0",
   "action": {
     "default_popup": "panel.html",
     "default_icon": "logo.png"
