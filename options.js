@@ -30,5 +30,5 @@ function showMultiProfile() {
 
 
 document.getElementById('save').addEventListener('click', saveOptions);
-document.getElementById('multi_profile').addEventListener('click', showMultiProfile);
+// document.getElementById('multi_profile').addEventListener('click', showMultiProfile);
 document.addEventListener('DOMContentLoaded', restoreOptions);

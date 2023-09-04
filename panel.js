@@ -7,6 +7,7 @@ async function runMain() {
     if ((config_key.config_key == undefined) || (config_key.config_key == '')) {
         chrome.runtime.openOptionsPage();
         window.close();
+        return;
     }
 
     config_data = config_key.config_key.toString().split('|', 6);
