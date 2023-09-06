@@ -4,14 +4,14 @@
     <style>
         body {
             min-width: 400px;
-            min-height: 150px;
+            min-height: 200px;
         }
 
-        .ui-autocomplete {
-            width: 250px
-            max-width: 250px;
+        .ui-autocomplete, .ui-widget {
+            width: 225px;
+            max-width: 225px;
             max-height: 100px;
-            overflow-y: auto;
+            overflow-y: visible;
             /* prevent horizontal scrollbar */
             overflow-x: hidden;
         }
@@ -28,6 +28,12 @@
 <p></p>
 <img src="logo.png" alt="REDCap logo" width="100" height="100" align="left">
 
+<div class="ui-widget" id="profileoptions" style="display:none;">
+    <label for="profile"><strong>Profile:</strong></label>
+    <input id="profile">
+</div>
+<p></p>
+
 <div class="ui-widget">
     <label for="projects"><strong>Project ID:</strong></label>
     <input id="projects">
@@ -35,7 +41,7 @@
 <br/>
 <div class="ui-widget">
     <label for="record"><strong>Record Number:</strong></label>
-    <input id="record" type="text" name="record" />&nbsp;<button id="goToRecord">Go</button>
+    <input id="record" type="text" name="record" size="5"/>&nbsp;<button id="goToRecord">Go</button>
 </div>
 
 

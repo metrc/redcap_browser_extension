@@ -11,20 +11,57 @@
 </head>
 <body>
 
+<span id="single_profile_text" style="display:block;">
+    <p>
+    <label>Your unique configuration key:<br/>
+        <textarea id="config_key" rows="2" cols="60"></textarea>
+    </label>
+    </p>
+</span>
 
-<p>
-<label>Your unique configuration key:<br/>
-    <textarea id="config_key" rows="5" cols="60"></textarea>
-</label>
-</p>
-<!--
 <p>
     <label><input type="checkbox" id="multi_profile"> Use Multiple Profiles</label>
 </p>
 
 <span id="multi_profile_text" style="display: none;">
+    <p><label>Profile Name:<br/>
+        <input type="text" id="profile_name_0" size="15" /> (this is your default profile)</label><br/>
+    <label>Configuration Key:
+        <textarea id="profile_key_0" rows="2" cols="60"></textarea></label>
+
+    </p>
+
+     <p><label>Profile Name:<br/>
+        <input type="text" id="profile_name_1" size="15" /> (leave blank to disable)</label><br/>
+    <label>Configuration Key:
+        <textarea id="profile_key_1" rows="2" cols="60"></textarea></label>
+
+    </p>
+
+     <p><label>Profile Name:<br/>
+        <input type="text" id="profile_name_2" size="15" /> (leave blank to disable)</label><br/>
+    <label>Configuration Key:
+        <textarea id="profile_key_2" rows="2" cols="60"></textarea></label>
+
+    </p>
+
+     <p><label>Profile Name:<br/>
+        <input type="text" id="profile_name_3" size="15" /> (leave blank to disable)</label><br/>
+    <label>Configuration Key:
+        <textarea id="profile_key_3" rows="2" cols="60"></textarea></label>
+
+    </p>
+
+     <p><label>Profile Name:<br/>
+        <input type="text" id="profile_name_4" size="15" /> (leave blank to disable)</label><br/>
+    <label>Configuration Key:
+        <textarea id="profile_key_4" rows="2" cols="60"></textarea></label>
+
+    </p>
+
+
 </span>
--->
+
 <button id="save">Save</button>
 
 <script src="options.js"></script>
