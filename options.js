@@ -4,8 +4,8 @@ let profile_names = [];
 async function saveOptions() {
     var configKey = document.getElementById('config_key').value;
     await chrome.storage.sync.set({'config_key': configKey});
-    saveProfiles();
-    window.close();
+    await saveProfiles();
+    document.getElementById('savedconfirmation').style.display = "inline-block";
 }
 
 async function restoreOptions() {
