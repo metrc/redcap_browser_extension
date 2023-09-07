@@ -1,7 +1,10 @@
 base_url = '';
 multiProfile = false;
+is_system_admin = false;
 profile_keys = [];
 profile_names = [];
+extra_config = [];
+config_data = [];
 
 async function runMain() {
     multiProfile = await chrome.storage.sync.get('multi_profile');
@@ -24,9 +27,11 @@ async function runMain() {
             '&NOAUTH&api_token='+config_data[4];
 
         $('#projects').autocomplete({ source: projects_url });
+        getExtraConfig();
 
-        if (config_data[5] == 0) {
-            $('#adminLinks').hide();
+        if ((config_data[5] == 1) || (extra_config.system_admin)) {
+            is_system_admin = true;
+            $('#adminLinks').show();
         }
 
     } else {
@@ -55,13 +60,15 @@ async function profileOnChange() {
 
     config_data = profile_keys.profile_keys[profile].split('|', 6);
     base_url = config_data[0] + 'redcap_v' + config_data[1] + '/';
-    console.log(base_url);
+
     projects_url = base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=projects&pid='+config_data[3]+
         '&NOAUTH&api_token='+config_data[4];
 
     $('#projects').autocomplete({ source: projects_url });
-    if (config_data[5] == 0) {
-        $('#adminLinks').hide();
+    getExtraConfig();
+    if ((config_data[5] == 1) || (extra_config.system_admin)) {
+        is_system_admin = true;
+        $('#adminLinks').show();
     }
 }
 
@@ -74,8 +81,45 @@ function checkForDefaultProfile() {
     }
 }
 
+async function getExtraConfig() {
+    connection = await fetch(base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=extraconfig&pid='+config_data[3]+
+        '&NOAUTH&api_token='+config_data[4]);
+    extra_config = await connection.json();
+}
+
+async function changeProjects() {
+    console.log(is_system_admin);
+    project_id = document.getElementById('projects').value;
+    document.getElementById('projectLinks').style.display = 'block';
+
+    if (is_system_admin) {
+        $('#goToUserAdmin').show();
+        $('#goToDesign').show();
+    }
+
+    if (!jQuery.isEmptyObject(extra_config)) {
+
+        if (extra_config.project_data[project_id].user_rights == 1) {
+            $('#goToUserAdmin').show();
+        } else {
+            $('#goToUserAdmin').hide();
+        }
+        if (extra_config.project_data[project_id].design == 1) {
+            $('#goToDesign').show();
+        } else {
+            $('#goToDesign').hide();
+        }
+
+        document.getElementById('newRecord').style.display = 'inline-block';
+        setNewHandler();
+
+    }
+
+}
+
 document.addEventListener('DOMContentLoaded', runMain);
 document.getElementById('profile').addEventListener('change', profileOnChange);
+document.getElementById('projects').addEventListener('change', changeProjects);
 document.getElementById('projects').addEventListener('click', checkForDefaultProfile);
 
 document.getElementById('goToRecord').addEventListener('click', () => {
@@ -93,10 +137,10 @@ document.getElementById('goToUserAdmin').addEventListener('click', () => {
     chrome.tabs.create({url: url});
 });
 
-document.getElementById('goToSetup').addEventListener('click', () => {
+document.getElementById('goToHome').addEventListener('click', () => {
     checkForDefaultProfile()
     let project_id = $( "#projects" ).val();
-    let url = base_url + 'ProjectSetup/index.php?pid=' + project_id;
+    let url = base_url + '/index.php?pid=' + project_id;
     chrome.tabs.create({url: url});
 });
 
@@ -119,15 +163,18 @@ document.getElementById('goToDesign').addEventListener('click', () => {
     chrome.tabs.create({url: url});
 });
 
-document.getElementById('goToCodebook').addEventListener('click', () => {
-    checkForDefaultProfile()
-    let project_id = $( "#projects" ).val();
-    let url = base_url + 'Design/data_dictionary_codebook.php?pid=' + project_id;
-    chrome.tabs.create({url: url});
-});
-
 document.getElementById('searchUsers').addEventListener('click', () => {
     checkForDefaultProfile()
     let url = base_url + 'ControlCenter/view_users.php';
     chrome.tabs.create({url: url});
 });
+
+function setNewHandler() {
+    document.getElementById('newRecord').addEventListener('click', () => {
+        checkForDefaultProfile()
+        let project_id = $("#projects").val();
+        let url = base_url + 'ExternalModules/?prefix=' + config_data[2] + '&page=newrec&pid=' + config_data[3] +
+            '&NOAUTH&api_token=' + config_data[4] + '&target_project=' + project_id;
+        chrome.tabs.create({url: url});
+    });
+}

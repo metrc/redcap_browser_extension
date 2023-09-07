@@ -41,17 +41,22 @@
 <br/>
 <div class="ui-widget">
     <label for="record"><strong>Record Number:</strong></label>
-    <input id="record" type="text" name="record" size="5"/>&nbsp;<button id="goToRecord">Go</button>
+    <input id="record" type="text" name="record" size="5"/>
+    <button id="goToRecord">Go<to Record</button>
 </div>
 
 
-<span id="adminLinks">
+<span id="projectLinks" style="display: none;">
 <br/><strong>Project Actions: </strong><br>
-  <button id="goToUserAdmin">Users</button>
-<button id="goToSetup">Setup</button>
-<button id="goToDesign">Designer</button>
-<button id="goToCodebook">Codebook</button>
-<br/><br/><br/>
+    <button id="newRecord" style="display: none;">New Record</button>
+<button id="goToHome">Home</button>
+
+    <button id="goToUserAdmin" style="display: none;">Users</button>
+<button id="goToDesign" style="display: none;">Designer</button>
+</span>
+
+<span id="adminLinks" style="display: none;">
+    <br/><br/>
 <strong>System Actions: </strong><br/>
 <button id="addUser">New User</button>  <button id="searchUsers">Search Users</button> <button id="manageEMs">External Modules</button>
 </span>
