@@ -27,11 +27,14 @@ async function runMain() {
             '&NOAUTH&api_token='+config_data[4];
 
         $('#projects').autocomplete({ source: projects_url });
-        getExtraConfig();
+        await getExtraConfig();
 
         if ((config_data[5] == 1) || (extra_config.system_admin)) {
             is_system_admin = true;
             $('#adminLinks').show();
+        } else {
+            is_system_admin = false;
+            $('#adminLinks').hide();
         }
 
     } else {
@@ -65,10 +68,15 @@ async function profileOnChange() {
         '&NOAUTH&api_token='+config_data[4];
 
     $('#projects').autocomplete({ source: projects_url });
-    getExtraConfig();
+
+    await getExtraConfig();
+
     if ((config_data[5] == 1) || (extra_config.system_admin)) {
         is_system_admin = true;
         $('#adminLinks').show();
+    } else {
+        is_system_admin = false;
+        $('#adminLinks').hide();
     }
 }
 
