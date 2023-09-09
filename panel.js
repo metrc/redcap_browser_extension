@@ -127,7 +127,9 @@ async function changeProjects() {
 
 document.addEventListener('DOMContentLoaded', runMain);
 document.getElementById('profile').addEventListener('change', profileOnChange);
+document.getElementById('profile').addEventListener('blur', profileOnChange);
 document.getElementById('projects').addEventListener('change', changeProjects);
+document.getElementById('projects').addEventListener('blur', changeProjects);
 document.getElementById('projects').addEventListener('click', checkForDefaultProfile);
 
 document.getElementById('goToRecord').addEventListener('click', () => {
