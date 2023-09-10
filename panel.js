@@ -96,13 +96,16 @@ async function getExtraConfig() {
 }
 
 async function changeProjects() {
-    console.log(is_system_admin);
     project_id = document.getElementById('projects').value;
+    document.getElementById('record_information').style.display = 'block';
     document.getElementById('projectLinks').style.display = 'block';
 
-    if (is_system_admin) {
+    if ((config_data[5] == 1) || (extra_config.system_admin)) {
+        console.log('system admin');
         $('#goToUserAdmin').show();
         $('#goToDesign').show();
+        setNewHandler();
+        return;
     }
 
     if (!jQuery.isEmptyObject(extra_config)) {
@@ -118,7 +121,7 @@ async function changeProjects() {
             $('#goToDesign').hide();
         }
 
-        document.getElementById('newRecord').style.display = 'inline-block';
+
         setNewHandler();
 
     }
