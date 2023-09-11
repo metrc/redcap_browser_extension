@@ -90,7 +90,7 @@ function checkForDefaultProfile() {
 }
 
 async function getExtraConfig() {
-    connection = await fetch(base_url + 'api/?type=module&prefix='+config_data[2]+'&page=extraconfig&pid='+config_data[3]+
+    connection = await fetch(base_url + 'api/?type=module&prefix=browser_extension_support&page=extraconfig&pid='+config_data[3]+
         '&NOAUTH&api_token='+config_data[4]);
     extra_config = await connection.json();
 }
@@ -100,31 +100,24 @@ async function changeProjects() {
     document.getElementById('record_information').style.display = 'block';
     document.getElementById('projectLinks').style.display = 'block';
 
-    if ((config_data[5] == 1) || (extra_config.system_admin)) {
-        console.log('system admin');
+    if (extra_config.system_admin) {
         $('#goToUserAdmin').show();
         $('#goToDesign').show();
         setNewHandler();
         return;
     }
 
-    if (!jQuery.isEmptyObject(extra_config)) {
-
-        if (extra_config.project_data[project_id].user_rights == 1) {
-            $('#goToUserAdmin').show();
-        } else {
-            $('#goToUserAdmin').hide();
-        }
-        if (extra_config.project_data[project_id].design == 1) {
-            $('#goToDesign').show();
-        } else {
-            $('#goToDesign').hide();
-        }
-
-
-        setNewHandler();
-
+    if (extra_config.project_data[project_id].user_rights == 1) {
+        $('#goToUserAdmin').show();
+    } else {
+        $('#goToUserAdmin').hide();
     }
+    if (extra_config.project_data[project_id].design == 1) {
+        $('#goToDesign').show();
+    } else {
+        $('#goToDesign').hide();
+    }
+    setNewHandler();
 
 }
 
@@ -186,8 +179,9 @@ function setNewHandler() {
     document.getElementById('newRecord').addEventListener('click', () => {
         checkForDefaultProfile()
         let project_id = $("#projects").val();
-        let url = base_url + 'api/?type=module&prefix=' + config_data[2] + '&page=newrec&pid=' + config_data[3] +
+        let url = base_url + 'redcap_v' + extra_config.redcap_version + '/ExternalModules/?type=module&prefix=browser_extension_support&page=newrec&pid=' + config_data[3] +
             '&NOAUTH&api_token=' + config_data[4] + '&target_project=' + project_id;
+        console.log(url);
         chrome.tabs.create({url: url});
     });
 }
