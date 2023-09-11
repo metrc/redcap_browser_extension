@@ -97,7 +97,6 @@ async function getExtraConfig() {
 
 async function changeProjects() {
     project_id = document.getElementById('projects').value;
-    document.getElementById('record_information').style.display = 'block';
     document.getElementById('projectLinks').style.display = 'block';
 
     if (extra_config.system_admin) {
