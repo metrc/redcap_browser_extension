@@ -12,7 +12,7 @@ async function runMain() {
     if (!multiProfile.multi_profile) {
         let config_key = await chrome.storage.sync.get('config_key');
 
-        if ((config_key.config_key === undefined) || (config_key.config_key == '')) {
+        if ((config_key.config_key == undefined) || (config_key.config_key == '')) {
             chrome.runtime.openOptionsPage();
             window.close();
             return;

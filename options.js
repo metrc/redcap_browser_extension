@@ -10,7 +10,9 @@ async function saveOptions() {
 
 async function restoreOptions() {
     chrome.storage.sync.get('config_key', function(data) {
-        document.getElementById('config_key').value = data.config_key;
+        if (data.config_key !== undefined) {
+            document.getElementById('config_key').value = data.config_key;
+        }
     });
     chrome.storage.sync.get('multi_profile', function(data) {
         document.getElementById("multi_profile").checked = data.multi_profile;
