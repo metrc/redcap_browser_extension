@@ -12,7 +12,6 @@ async function runMain() {
     if (!multiProfile.multi_profile) {
         let config_key = await chrome.storage.sync.get('config_key');
 
-
         if ((config_key.config_key === undefined) || (config_key.config_key == '')) {
             chrome.runtime.openOptionsPage();
             window.close();
@@ -22,14 +21,14 @@ async function runMain() {
 
         config_data = config_key.config_key.toString().split('|', 6);
 
-        base_url = config_data[0] + 'redcap_v' + config_data[1] + '/';
-        projects_url = base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=projects&pid='+config_data[3]+
+        base_url = config_data[0];
+        projects_url = base_url + 'api/?type=module&prefix=browser_extension_support&page=projects&pid='+config_data[3]+
             '&NOAUTH&api_token='+config_data[4];
 
         $('#projects').autocomplete({ source: projects_url });
         await getExtraConfig();
 
-        if ((config_data[5] == 1) || (extra_config.system_admin)) {
+        if (extra_config.system_admin) {
             is_system_admin = true;
             $('#adminLinks').show();
         } else {
@@ -46,6 +45,7 @@ async function runMain() {
             window.close();
             return;
         }
+
         document.getElementById("profileoptions").style.display = "block";
         // populate the dropdown
         let profile_dropdown = document.getElementById("profile");
@@ -62,16 +62,16 @@ async function profileOnChange() {
     profile = profile - 1;
 
     config_data = profile_keys.profile_keys[profile].split('|', 6);
-    base_url = config_data[0] + 'redcap_v' + config_data[1] + '/';
+    base_url = config_data[0];
 
-    projects_url = base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=projects&pid='+config_data[3]+
+    projects_url = base_url + 'api/?type=module&prefix=browser_extension_support&page=projects&pid='+config_data[3]+
         '&NOAUTH&api_token='+config_data[4];
 
     $('#projects').autocomplete({ source: projects_url });
 
     await getExtraConfig();
 
-    if ((config_data[5] == 1) || (extra_config.system_admin)) {
+    if (extra_config.system_admin) {
         is_system_admin = true;
         $('#adminLinks').show();
     } else {
@@ -90,7 +90,7 @@ function checkForDefaultProfile() {
 }
 
 async function getExtraConfig() {
-    connection = await fetch(base_url + 'ExternalModules/?prefix='+config_data[2]+'&page=extraconfig&pid='+config_data[3]+
+    connection = await fetch(base_url + 'api/?type=module&prefix='+config_data[2]+'&page=extraconfig&pid='+config_data[3]+
         '&NOAUTH&api_token='+config_data[4]);
     extra_config = await connection.json();
 }
@@ -139,46 +139,46 @@ document.getElementById('goToRecord').addEventListener('click', () => {
     checkForDefaultProfile()
     let project_id = $( "#projects" ).val();
     let record_id = $( "#record" ).val();
-    let url = base_url + 'DataEntry/record_home.php?pid=' + project_id + '&id=' + record_id;
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/DataEntry/record_home.php?pid=' + project_id + '&id=' + record_id;
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('goToUserAdmin').addEventListener('click', () => {
     checkForDefaultProfile()
     let project_id = $( "#projects" ).val();
-    let url = base_url + 'UserRights/index.php?pid=' + project_id;
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/UserRights/index.php?pid=' + project_id;
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('goToHome').addEventListener('click', () => {
     checkForDefaultProfile()
     let project_id = $( "#projects" ).val();
-    let url = base_url + '/index.php?pid=' + project_id;
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/index.php?pid=' + project_id;
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('addUser').addEventListener('click', () => {
     checkForDefaultProfile()
-    let url = base_url + 'ControlCenter/create_user.php';
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/' + 'ControlCenter/create_user.php';
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('manageEMs').addEventListener('click', () => {
     checkForDefaultProfile()
-    let url = base_url + 'ExternalModules/manager/control_center.php';
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/' + 'ExternalModules/manager/control_center.php';
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('goToDesign').addEventListener('click', () => {
     checkForDefaultProfile()
     let project_id = $( "#projects" ).val();
-    let url = base_url + 'Design/online_designer.php?pid=' + project_id;
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/' + 'Design/online_designer.php?pid=' + project_id;
     chrome.tabs.create({url: url});
 });
 
 document.getElementById('searchUsers').addEventListener('click', () => {
     checkForDefaultProfile()
-    let url = base_url + 'ControlCenter/view_users.php';
+    let url = base_url + 'redcap_v' + extra_config.redcap_version + '/' + 'ControlCenter/view_users.php';
     chrome.tabs.create({url: url});
 });
 
@@ -186,7 +186,7 @@ function setNewHandler() {
     document.getElementById('newRecord').addEventListener('click', () => {
         checkForDefaultProfile()
         let project_id = $("#projects").val();
-        let url = base_url + 'ExternalModules/?prefix=' + config_data[2] + '&page=newrec&pid=' + config_data[3] +
+        let url = base_url + 'api/?type=module&prefix=' + config_data[2] + '&page=newrec&pid=' + config_data[3] +
             '&NOAUTH&api_token=' + config_data[4] + '&target_project=' + project_id;
         chrome.tabs.create({url: url});
     });
